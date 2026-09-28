@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ペンギン戦績メモ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=506c9c005f">
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@7/dist/tesseract.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M16 3.5c-5.8 0-9.5 4.8-9.5 11V22c0 3.6 3.2 6.5 9.5 6.5s9.5-2.9 9.5-6.5v-7.5c0-6.2-3.7-11-9.5-11Z" fill="currentColor"/><ellipse cx="16" cy="20.2" rx="5.4" ry="6.6" fill="var(--surface)"/><circle cx="13" cy="12" r="1.5" fill="var(--surface)"/><circle cx="19" cy="12" r="1.5" fill="var(--surface)"/></svg>
+      </div>
+      <div>
+        <h1>ペンギン戦績メモ</h1>
+        <p class="brand-sub">for Faaast Penguin</p>
+      </div>
+    </div>
+    <div class="top-pills">
+      <span class="mode-pill" id="modePill" data-mode="unknown" title="最後に見たロビーのモード">モード不明</span>
+      <div class="status-pill" id="statusPill"><span id="statusDot" class="dot"></span><span id="statusText">停止中</span></div>
+    </div>
+  </div>
+  <nav id="tabs" class="tabs" aria-label="画面の切り替え">
+    <button data-tab="live" class="active">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>ライブ記録
+    </button>
+    <button data-tab="video">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M17 10l4-2.5v9L17 14Z"/></svg>録画から
+    </button>
+    <button data-tab="records">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="2.4" rx="1.2"/><rect x="4" y="10.8" width="16" height="2.4" rx="1.2"/><rect x="4" y="16.6" width="16" height="2.4" rx="1.2"/></svg>記録一覧
+    </button>
+    <button data-tab="stats">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="12" width="4" height="8" rx="1"/><rect x="10" y="7" width="4" height="13" rx="1"/><rect x="16" y="4" width="4" height="16" rx="1"/></svg>コース別
+    </button>
+  </nav>
+</header>
+
+<main>
+  <!-- 見るモードの切り替え（記録一覧・コース別で表示） -->
+  <div id="viewBar" class="viewbar" hidden>
+    <div id="modeFilter" class="segmented" role="tablist" aria-label="表示するモード">
+      <button data-mode="normal" class="active">通常マッチ <span>0</span></button>
+      <button data-mode="custom">カスタム <span>0</span></button>
+      <button data-mode="unknown">不明 <span>0</span></button>
+      <button data-mode="all">すべて <span>0</span></button>
+    </div>
+  </div>
+
+  <!-- 戦績のまとめ（記録一覧・コース別で表示） -->
+  <section id="summary" class="kpis" hidden>
+    <div class="kpi"><span class="kpi-label">レース数</span><span class="kpi-value" id="kpiRaces">0</span></div>
+    <div class="kpi"><span class="kpi-label">平均順位</span><span class="kpi-value" id="kpiAvg">-</span></div>
+    <div class="kpi"><span class="kpi-label">1位</span><span class="kpi-value" id="kpiWins">0</span></div>
+    <div class="kpi"><span class="kpi-label">表彰台率</span><span class="kpi-value" id="kpiPodium">-</span></div>
+    <div class="kpi"><span class="kpi-label">NEW RECORD</span><span class="kpi-value" id="kpiNr">0</span></div>
+    <div class="kpi"><span class="kpi-label">DROP OUT</span><span class="kpi-value" id="kpiDo">0</span></div>
+  </section>
+
+  <section id="tab-live" class="tab active">
+    <div class="hero card">
+      <div class="hero-text">
+        <p>「記録開始」を押して、共有する画面で <b>Faaast Penguin のウィンドウ</b>を選んでください（画面全体やタブの共有には対応していません）。コース・Activity・順位・タイムを自動で記録します。通常マッチとカスタムマッチは、ロビーの画面から自動で見分けます。</p>
+      </div>
+      <div class="hero-actions">
+        <button id="liveStart" class="btn primary big">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>記録開始
+        </button>
+        <button id="liveStop" class="btn" disabled>停止</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-video" class="tab">
+    <div class="card">
+      <h2 class="card-title">録画から読み込み</h2>
+      <p class="muted">録画した動画ファイルを読み込んで、中のレース結果を記録します。</p>
+      <div class="row">
+        <label class="btn primary file-btn">動画ファイルを選ぶ<input type="file" id="videoFile" accept="video/*" hidden></label>
+        <button id="videoStop" class="btn" disabled>中止</button>
+      </div>
+      <progress id="videoProgress" value="0" max="1"></progress>
+    </div>
+  </section>
+
+  <!-- 読み取り中の様子（ライブ記録・録画から で表示） -->
+  <section id="monitor">
+    <div class="race-tiles">
+      <div class="tile"><span class="tile-label">コース</span><span class="tile-value" id="curCourse">-</span></div>
+      <div class="tile"><span class="tile-label">Activity</span><span class="tile-value" id="curActivity">-</span></div>
+      <div class="tile accent"><span class="tile-label">順位</span><span class="tile-value" id="curRank">-</span></div>
+      <div class="tile"><span class="tile-label">タイム</span><span class="tile-value mono" id="curTime">-</span></div>
+    </div>
+    <div class="monitor-grid">
+      <div class="card preview-card">
+        <div class="card-head">
+          <h3>プレビュー</h3>
+          <label class="switch small"><input type="checkbox" id="debugBoxes"><span class="track"></span>読み取り範囲</label>
+        </div>
+        <canvas id="preview" width="480" height="270"></canvas>
+      </div>
+      <div class="card log-card">
+        <div class="card-head"><h3>ログ</h3></div>
+        <ol id="log" class="log"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-live-settings" class="tab-extra">
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3>タイムの表示（ブラックパス）</h3>
+          <p class="muted small">公式ではベストタイムの確認がブラックパスの特典なので、このツールでもブラックパスを確認できた人だけタイムを表示します。確認はシーズンごとです。</p>
+        </div>
+      </div>
+      <div class="settings">
+        <div class="setting">
+          <span><b>状態</b><small id="passDetail">確認できるまで、タイムは表示されません（記録はされています）</small></span>
+          <span class="setting-action"><span id="passStatus" class="pass-badge">未確認</span></span>
+        </div>
+        <div class="setting">
+          <span><b>Steam 録画との照合</b><small>確認のとき、Steam のバックグラウンド録画に同じ画面が映っているかを見比べます（HEVC を再生できるブラウザが必要）</small></span>
+          <span class="setting-action"><span id="steamCap" class="pass-badge">-</span></span>
+        </div>
+      </div>
+      <ol class="steps">
+        <li>Steam のバックグラウンド録画をオンにして、下の「Steam録画フォルダ」を選んでおく</li>
+        <li>「記録開始」を押して、Faaast Penguin のウィンドウを共有する</li>
+        <li>ゲームで「シーズンパス」を開き、ゴールドパスとブラックパスの両方に「OWNED」と出ている画面を表示する</li>
+        <li>そのまま通常マッチのロビーに戻ると、Steam の録画と照合して確認完了です（数十秒かかります）</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3>NEW RECORD の自動切り抜き</h3>
+          <p class="muted small">NEW RECORD が出たレースを、Steam のバックグラウンド録画から「レース開始〜ゴール後10秒」だけ切り抜いて保存します（画質そのまま・音声付き）。</p>
+        </div>
+      </div>
+      <p id="clipUnsupported" class="notice warn" hidden>このブラウザでは使えません。Chrome か Edge で開いてください。Brave の場合は、アドレス欄に <code>brave://flags</code> と入力し、「File System Access API」を Enabled にしてブラウザを再起動すると使えます。</p>
+      <div id="clipControls" class="settings">
+        <label class="setting">
+          <span><b>切り抜きをオンにする</b><small>記録開始のときにフォルダの使用許可を確認します</small></span>
+          <span class="switch"><input type="checkbox" id="clipEnabled"><span class="track"></span></span>
+        </label>
+        <div class="setting">
+          <span><b>Steam録画フォルダ</b><small>Steam の設定 →「ゲームの録画」→「録画の保存場所」</small></span>
+          <span class="setting-action"><span id="steamDirName" class="folder">未選択</span><button id="pickSteam" class="btn">選ぶ</button></span>
+        </div>
+        <div class="setting">
+          <span><b>保存先フォルダ</b><small>この中に「通常マッチ」「カスタムマッチ」「モード不明」のフォルダを作って分けて保存します</small></span>
+          <span class="setting-action"><span id="saveDirName" class="folder">未選択</span><button id="pickSave" class="btn">選ぶ</button></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-records" class="tab">
+    <div class="card">
+      <div class="toolbar">
+        <h2 class="card-title">記録一覧</h2>
+        <div class="row">
+          <button id="addRecord" class="btn">手動で追加</button>
+          <button id="exportCsv" class="btn">CSVで保存</button>
+          <label class="btn">CSVを読み込む<input type="file" id="importCsv" accept=".csv,text/csv" hidden></label>
+          <button id="clearAll" class="btn danger">全部消す</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="recordsTable">
+          <thead><tr><th>日時</th><th>コース</th><th>Act</th><th>順位</th><th class="num">タイム</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="noRecords" class="empty">まだ記録がありません。ライブ記録を始めるか、録画を読み込んでください。</p>
+    </div>
+  </section>
+
+  <section id="tab-stats" class="tab">
+    <div class="card">
+      <div class="toolbar"><h2 class="card-title">コース別の成績</h2></div>
+      <div class="table-wrap">
+        <table id="statsTable">
+          <thead><tr><th>コース</th><th class="num">回数</th><th>平均順位</th><th>最高</th><th class="num">ベストタイム</th><th class="num">DROP OUT</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="noStats" class="empty">まだ記録がありません</p>
+    </div>
+
+    <div class="card">
+      <div class="toolbar">
+        <div>
+          <h2 class="card-title">コース一覧</h2>
+          <p class="muted small">公式のコースは、ツールの更新で自動的に追加されます。更新がまだの新しいワールドは、ここから自分で追加できます（このブラウザにだけ保存されます）。</p>
+        </div>
+        <button id="addWorld" class="btn primary">ワールドを追加</button>
+      </div>
+      <p id="unregistered" class="notice" hidden></p>
+      <div id="customWorldList" class="settings"></div>
+      <p id="noCustomWorlds" class="empty small">自分で追加したワールドはありません</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>ペンギン戦績メモは、ファンが作った非公式ツールです。Faaast Penguin の開発・運営とは関係ありません。</p>
+  <p>記録はこのブラウザの中だけに保存され、どこにも送信されません。ブラウザのデータを消すと記録も消えるので、「記録一覧」の「CSVで保存」でときどき保存してください。</p>
+</footer>
+
+<dialog id="editDialog">
+  <form method="dialog" id="editForm">
+    <h2>記録の編集</h2>
+    <label>日時<input type="datetime-local" name="at" step="1"></label>
+    <label>コース<select name="course"></select></label>
+    <div class="form-row">
+      <label>Activity<select name="activity"><option value="">-</option><option>1</option><option>2</option><option>3</option><option>4</option><option>Final</option></select></label>
+      <label>順位<input type="number" name="rank" min="1" max="99"></label>
+    </div>
+    <label>タイム<input type="text" name="time" placeholder="1:30.70"></label>
+    <label>モード<select name="mode"><option value="normal">通常マッチ</option><option value="custom">カスタムマッチ</option><option value="unknown">モード不明</option></select></label>
+    <label class="check"><input type="checkbox" name="dropout"> DROP OUT（ゴールできなかった）</label>
+    <div class="row end">
+      <button value="cancel" class="btn" formnovalidate>キャンセル</button>
+      <button value="save" class="btn primary">保存</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="worldDialog">
+  <form method="dialog" id="worldForm">
+    <h2>ワールドを追加</h2>
+    <label>ワールド名<input type="text" name="world" placeholder="例：アクアワンダー"></label>
+    <label>形式<select name="kind">
+      <option value="course">コースA〜D</option>
+      <option value="activity">Activity 1・2/3・2/3・Final</option>
+    </select></label>
+    <label><span id="slotName0">コースA</span><input type="text" name="c0"></label>
+    <label><span id="slotName1">コースB</span><input type="text" name="c1"></label>
+    <label><span id="slotName2">コースC</span><input type="text" name="c2"></label>
+    <label><span id="slotName3">コースD</span><input type="text" name="c3"></label>
+    <p class="muted small">コース名は、レース開始時の黄色い帯に出る名前をそのまま入れてください（「STAGE1:」などの前置きはあってもなくても判別できます）。</p>
+    <div class="row end">
+      <button value="cancel" class="btn" formnovalidate>キャンセル</button>
+      <button value="save" class="btn primary">追加</button>
+    </div>
+  </form>
+</dialog>
+
+<video id="srcVideo" muted playsinline hidden></video>
+<script src="app.js?v=4e412eb704"></script>
+</body>
+</html>
