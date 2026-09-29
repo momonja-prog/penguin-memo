@@ -415,4 +415,4 @@ tr.chart-row:hover td { background: none; }
 .chart-locked p { margin: 6px 0 0; color: var(--faint); font-size: .85rem; }
 
 /* ===== 自動バックアップ ===== */
-.settings.backup { margin-top: 16px; }
+.settings.backup { margin: 0 0 16px; }
