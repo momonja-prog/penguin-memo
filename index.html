@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
 <title>ペンギン戦績メモ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=9ea9e881aa">
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@7/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js" integrity="sha384-2BQ3U3OdKOb0Uczxqr41I9UvZkzr4V9Hv8uSzMMZAlmhsFClvdZX5wi5fDCzG+tM" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 <header class="topbar">
@@ -124,7 +125,7 @@
       <div class="settings">
         <div class="setting">
           <span><b>状態</b><small id="passDetail">確認できるまで、タイムは表示されません（記録はされています）</small></span>
-          <span class="setting-action"><span id="passStatus" class="pass-badge">未確認</span></span>
+          <span class="setting-action"><span id="passStatus" class="pass-badge">未確認</span><button id="passReset" class="btn danger" hidden>確認を取り消す</button></span>
         </div>
         <div class="setting">
           <span><b>Steam 録画との照合</b><small>確認のとき、Steam のバックグラウンド録画に同じ画面が映っているかを見比べます（HEVC を再生できるブラウザが必要）</small></span>
@@ -257,6 +258,6 @@
 </dialog>
 
 <video id="srcVideo" muted playsinline hidden></video>
-<script src="app.js?v=a96b76a04f"></script>
+<script src="app.js?v=71047f0a74"></script>
 </body>
 </html>
