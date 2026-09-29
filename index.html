@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=b0d689be66">
+<link rel="stylesheet" href="style.css?v=2935f08923">
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js" integrity="sha384-2BQ3U3OdKOb0Uczxqr41I9UvZkzr4V9Hv8uSzMMZAlmhsFClvdZX5wi5fDCzG+tM" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
@@ -74,7 +74,7 @@
   <section id="tab-live" class="tab active">
     <div class="hero card">
       <div class="hero-text">
-        <p>「記録開始」を押して、共有する画面で <b>Faaast Penguin のウィンドウ</b>を選んでください（画面全体やタブの共有には対応していません）。コース・Activity・順位・タイムを自動で記録します。通常マッチとカスタムマッチは、ロビーの画面から自動で見分けます。</p>
+        <p>「記録開始」を押して、共有する画面で <b>Faaast Penguin のウィンドウ</b>（ゲームをフルスクリーンで遊ぶ時は<b>画面全体</b>）を選んでください。コース・Activity・順位・タイムを自動で記録します。通常マッチとカスタムマッチは、ロビーの画面から自動で見分けます。</p>
       </div>
       <div class="hero-actions">
         <button id="liveStart" class="btn primary big">
@@ -82,6 +82,14 @@
         </button>
         <button id="liveStop" class="btn" disabled>停止</button>
       </div>
+    </div>
+    <div id="blackNotice" class="notice warn black-notice" hidden>
+      <b>共有した映像が真っ黒で、読み取れていません。</b>
+      ゲームをフルスクリーンで遊んでいると、ウィンドウの共有では映像が届かないことがあります。次のどちらかを試してください。
+      <ol>
+        <li>「停止」→「記録開始」で、共有する画面を <b>画面全体</b> にする（ゲームが映っているモニターを選ぶ）</li>
+        <li>ゲームの設定で、画面モードを <b>ウィンドウ</b> または <b>ボーダーレス（フルスクリーンウィンドウ）</b> にする</li>
+      </ol>
     </div>
   </section>
 
@@ -140,7 +148,7 @@
       </div>
       <ol class="steps">
         <li>Steam のバックグラウンド録画をオンにして、下の「Steam録画フォルダ」を選んでおく</li>
-        <li>「記録開始」を押して、Faaast Penguin のウィンドウを共有する</li>
+        <li>「記録開始」を押して、Faaast Penguin のウィンドウ（フルスクリーンなら画面全体）を共有する</li>
         <li>ゲームで「シーズンパス」を開き、ゴールドパスとブラックパスの両方に「OWNED」と出ている画面を表示する</li>
         <li>そのまま通常マッチのロビーに戻ると、Steam の録画と照合して確認完了です（数十秒かかります）</li>
       </ol>
@@ -270,6 +278,6 @@
 </dialog>
 
 <video id="srcVideo" muted playsinline hidden></video>
-<script src="app.js?v=c560c5f0a9"></script>
+<script src="app.js?v=c42bd9c3c6"></script>
 </body>
 </html>

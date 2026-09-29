@@ -426,3 +426,8 @@ tr.chart-row:hover td { background: none; }
 .update-bar .btn.primary { background: #fff; color: var(--accent); }
 .update-bar .btn:not(.primary) { background: rgba(255, 255, 255, .18); color: #fff; }
 .update-bar:not([hidden]) + .topbar { top: 0; }
+
+/* 映像が真っ黒の時の案内 */
+.black-notice { margin-top: 12px; line-height: 1.7; }
+.black-notice b:first-child { display: block; }
+.black-notice ol { margin: 6px 0 0; padding-left: 1.4em; }
