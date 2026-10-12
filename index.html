@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=77e8924c28">
+<link rel="stylesheet" href="style.css?v=42ddded410">
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js" integrity="sha384-2BQ3U3OdKOb0Uczxqr41I9UvZkzr4V9Hv8uSzMMZAlmhsFClvdZX5wi5fDCzG+tM" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
@@ -81,6 +81,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>記録開始
         </button>
         <button id="liveStop" class="btn" disabled>停止</button>
+        <button type="button" class="help-btn hero-help" data-help="live" aria-label="使い方" title="使い方">?</button>
         <button id="clipNow" class="btn" title="レース中ならゴールの後に、レースの合間なら直前の試合を、Steam 録画から切り抜きます">この試合を切り抜く</button>
       </div>
     </div>
@@ -96,7 +97,7 @@
 
   <section id="tab-video" class="tab">
     <div class="card">
-      <h2 class="card-title">録画から読み込み</h2>
+      <h2 class="card-title">録画から読み込み<button type="button" class="help-btn" data-help="video" aria-label="使い方" title="使い方">?</button></h2>
       <p class="muted">録画した動画ファイルを読み込んで、中のレース結果を記録します。</p>
       <div class="row">
         <label class="btn primary file-btn">動画ファイルを選ぶ<input type="file" id="videoFile" accept="video/*" hidden></label>
@@ -117,7 +118,7 @@
     <div class="monitor-grid">
       <div class="card preview-card">
         <div class="card-head">
-          <h3>プレビュー</h3>
+          <h3>プレビュー<button type="button" class="help-btn" data-help="monitor" aria-label="使い方" title="使い方">?</button></h3>
           <label class="switch small"><input type="checkbox" id="debugBoxes"><span class="track"></span>読み取り範囲</label>
         </div>
         <canvas id="preview" width="480" height="270"></canvas>
@@ -133,7 +134,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <h3>タイムの表示（ブラックパス）</h3>
+          <h3>タイムの表示（ブラックパス）<button type="button" class="help-btn" data-help="pass" aria-label="使い方" title="使い方">?</button></h3>
           <p class="muted small">公式ではベストタイムの確認がブラックパスの特典なので、このツールでもブラックパスを確認できた人だけタイムを表示します。確認はシーズンごとです。</p>
         </div>
       </div>
@@ -158,7 +159,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <h3>NEW RECORD の自動切り抜き</h3>
+          <h3>NEW RECORD の自動切り抜き<button type="button" class="help-btn" data-help="clip" aria-label="使い方" title="使い方">?</button></h3>
           <p class="muted small">NEW RECORD が出たレースを、Steam のバックグラウンド録画から「レース開始〜ゴール後10秒」だけ切り抜いて保存します（画質そのまま・音声付き）。</p>
         </div>
       </div>
@@ -183,7 +184,7 @@
   <section id="tab-records" class="tab">
     <div class="card">
       <div class="toolbar">
-        <h2 class="card-title">記録一覧</h2>
+        <h2 class="card-title">記録一覧<button type="button" class="help-btn" data-help="records" aria-label="使い方" title="使い方">?</button></h2>
         <div class="row">
           <button id="addRecord" class="btn">手動で追加</button>
           <button id="exportCsv" class="btn">CSVで保存</button>
@@ -193,7 +194,7 @@
       </div>
       <div id="backupRow" class="settings backup">
         <div class="setting">
-          <span><b>自動バックアップ</b><small id="backupState">記録が増えるたびに、選んだ CSV ファイルへ自動で上書き保存します</small></span>
+          <span><b>自動バックアップ<button type="button" class="help-btn" data-help="backup" aria-label="使い方" title="使い方">?</button></b><small id="backupState">記録が増えるたびに、選んだ CSV ファイルへ自動で上書き保存します</small></span>
           <span class="setting-action"><span id="backupName" class="folder">オフ</span><button id="backupOff" class="btn danger" hidden>オフにする</button><button id="backupPick" class="btn">保存先を選ぶ</button></span>
         </div>
       </div>
@@ -209,7 +210,7 @@
 
   <section id="tab-stats" class="tab">
     <div class="card">
-      <div class="toolbar"><h2 class="card-title">人数帯ごとの成績</h2></div>
+      <div class="toolbar"><h2 class="card-title">人数帯ごとの成績<button type="button" class="help-btn" data-help="bands" aria-label="使い方" title="使い方">?</button></h2></div>
       <div class="table-wrap">
         <table id="bandTable">
           <thead><tr><th>人数</th><th class="num">回数</th><th>平均順位</th><th class="num">1位</th><th class="num">表彰台率</th><th class="num">DROP OUT</th></tr></thead>
@@ -219,7 +220,7 @@
       <p id="bandNote" class="muted small"></p>
     </div>
     <div class="card">
-      <div class="toolbar"><h2 class="card-title">コース別の成績</h2></div>
+      <div class="toolbar"><h2 class="card-title">コース別の成績<button type="button" class="help-btn" data-help="stats" aria-label="使い方" title="使い方">?</button></h2></div>
       <div class="table-wrap">
         <table id="statsTable">
           <thead><tr><th>コース</th><th class="num">回数</th><th>平均順位</th><th>最高</th><th class="num">ベストタイム</th><th class="num">DROP OUT</th></tr></thead>
@@ -232,7 +233,7 @@
     <div class="card">
       <div class="toolbar">
         <div>
-          <h2 class="card-title">コース一覧</h2>
+          <h2 class="card-title">コース一覧<button type="button" class="help-btn" data-help="worlds" aria-label="使い方" title="使い方">?</button></h2>
           <p class="muted small">公式のコースは、ツールの更新で自動的に追加されます。更新がまだの新しいワールドは、ここから自分で追加できます（このブラウザにだけ保存されます）。</p>
         </div>
         <button id="addWorld" class="btn primary">ワールドを追加</button>
@@ -248,6 +249,177 @@
   <p>ペンギン戦績メモは、ファンが作った非公式ツールです。Faaast Penguin の開発・運営とは関係ありません。</p>
   <p>記録はこのブラウザの中だけに保存され、どこにも送信されません。ブラウザのデータを消すと記録も消えるので、「記録一覧」の「CSVで保存」でときどき保存してください。</p>
 </footer>
+
+<!-- 使い方（各項目の「?」で開く） -->
+<dialog id="helpDialog">
+  <form method="dialog">
+    <div id="helpBody" class="help-body"></div>
+    <div class="row end"><button value="close" class="btn primary">閉じる</button></div>
+  </form>
+</dialog>
+
+<template id="help-live">
+  <h2>ライブ記録の使い方</h2>
+  <ol>
+    <li><b>記録開始</b> を押します</li>
+    <li>共有する画面を選ぶ画面が出るので、<b>Faaast Penguin のウィンドウ</b> を選んで「共有」を押します
+      <ul>
+        <li>ゲームを <b>フルスクリーン</b> で遊ぶ時は、<b>画面全体</b>（ゲームが映っているモニター）を選んでください。フルスクリーンのゲームをウィンドウとして共有すると、真っ黒になって読み取れないことがあります</li>
+        <li>ゲームを <b>ウィンドウ</b> や <b>ボーダーレス</b> で遊ぶなら、ウィンドウの共有で大丈夫です</li>
+        <li>ブラウザのタブの共有には対応していません</li>
+      </ul>
+    </li>
+    <li>あとは普通に遊ぶだけです。<b>このページは開いたまま</b> にしておいてください（ほかのタブやウィンドウを前に出していても大丈夫です）</li>
+  </ol>
+  <h3>記録されるもの</h3>
+  <p>コース名・Activity・順位・タイムを、ゴールした後の画面から読み取ります。順位は <b>左下の大きな数字</b>、タイムは <b>右側の表示</b> を見ています。</p>
+  <figure><img src="help/result.jpg" alt="ゴール後の画面。右のタイムと左下の順位を読み取る" loading="lazy"><figcaption>枠の2か所を読み取っています</figcaption></figure>
+  <ul>
+    <li>ゴールできる人数の上限に届いて終わったレースは「DROP OUT」として記録します</li>
+    <li>DROP OUT の後に次のレースを観戦した分は記録しません</li>
+  </ul>
+  <h3>通常マッチとカスタムマッチ</h3>
+  <p>ロビーの画面から自動で見分けます。記録を始めてから一度もロビーを通っていないレースは「モード不明」になります（記録一覧の「編集」で直せます）。</p>
+  <figure><img src="help/lobby-normal.jpg" alt="通常マッチのロビー。右下の「プレイモード選択」" loading="lazy"><figcaption>通常マッチ：右下の「プレイモード選択」</figcaption></figure>
+  <figure><img src="help/lobby-custom-host.jpg" alt="カスタムマッチのロビー。右の「前回のツアー結果」" loading="lazy"><figcaption>カスタムマッチ：右の「前回のツアー結果」（部屋を作った時）</figcaption></figure>
+  <figure><img src="help/lobby-custom-guest.jpg" alt="カスタムマッチに参加した時のロビー。右上の「前回のツアー結果」" loading="lazy"><figcaption>カスタムマッチ：右上の「前回のツアー結果」（参加した時）</figcaption></figure>
+  <h3>この試合を切り抜く</h3>
+  <p>レース中に押すとゴールの後に、レースの合間に押すと直前の試合を、Steam の録画から動画として保存します。先に「NEW RECORD の自動切り抜き」の欄で、Steam録画フォルダと保存先フォルダを選んでおいてください。</p>
+  <h3>うまく記録されない時</h3>
+  <ul>
+    <li>ゲームは <b>16:9</b>（1920×1080 など）の表示を想定しています。小さすぎると読み間違いが増えます</li>
+    <li>ゲームの上に別のウィンドウや通知が重ならないようにしてください</li>
+    <li>プレビューが真っ黒なら、上の「フルスクリーン」の説明を見てください</li>
+  </ul>
+</template>
+
+<template id="help-video">
+  <h2>録画から読み込む</h2>
+  <p>録画しておいた動画ファイルを読み込んで、中のレースを記録します。ライブ記録を忘れた時などに使えます。</p>
+  <ol>
+    <li><b>動画ファイルを選ぶ</b> を押して、動画を選びます</li>
+    <li>動画を最初から順に読み取ります。動画の長さと同じくらいか、それ以上の時間がかかります</li>
+    <li>途中でやめる時は <b>中止</b> を押します（それまでに読み取った分は記録されます）</li>
+  </ol>
+  <ul>
+    <li>記録の日時は、ファイルの日時をもとにした目安になります</li>
+    <li>ブラウザが再生できない形式の動画は読み込めません。Steam の録画（HEVC）は、パソコンによっては再生できないことがあります</li>
+  </ul>
+</template>
+
+<template id="help-monitor">
+  <h2>プレビューとログ</h2>
+  <ul>
+    <li><b>プレビュー</b>：ツールが今見ている画面です。ゲームが映っていれば、正しく共有できています</li>
+    <li><b>読み取り範囲</b>：オンにすると、画面のどこを読んでいるかを枠で表示します</li>
+    <li><b>ログ</b>：コースを見つけた・記録した、などの動きを新しい順に表示します。うまく記録されない時は、ここを見ると原因がわかることがあります</li>
+  </ul>
+  <p>上のタイルには、今のレースのコース・Activity・順位・タイムが出ます。</p>
+</template>
+
+<template id="help-pass">
+  <h2>タイムの表示（ブラックパス）</h2>
+  <p>公式では、各コースのベストタイムを見られるのは <b>ブラックパスの特典</b> です。公式に迷惑をかけないよう、このツールでも <b>ブラックパスを持っていることを確認できた人だけ</b> タイムを表示します。確認できるまでもタイムは記録されていて、確認できた時点で過去の分も表示されます。</p>
+  <h3>確認のしかた</h3>
+  <ol>
+    <li>Steam のバックグラウンド録画をオンにします（Steam の「設定」→「ゲームの録画」）</li>
+    <li>下の「NEW RECORD の自動切り抜き」の欄で、<b>Steam録画フォルダ</b> を選びます（Steam の「録画の保存場所」のフォルダ）</li>
+    <li>記録開始して、ゲームの画面を共有します</li>
+    <li>ゲームで <b>シーズンパス</b> を開き、ゴールドパスとブラックパスの両方に <b>OWNED</b> と出ている画面を表示します</li>
+    <li>そのまま <b>通常マッチのロビー</b> に戻ります。Steam の録画と照合して、確認完了です（数十秒かかります）</li>
+  </ol>
+  <ul>
+    <li>確認は <b>シーズンごと</b> です。シーズンが変わったら、もう一度同じ手順で確認してください</li>
+    <li>照合には、ブラウザが Steam の録画（HEVC 形式）を再生できる必要があります。「Steam 録画との照合」の欄に、使えるかどうかが出ます。Edge では Microsoft Store の「HEVC ビデオ拡張機能」が必要なことがあります</li>
+    <li>「確認を取り消す」を押すと、確認する前の状態に戻ります（記録は消えません）</li>
+  </ul>
+</template>
+
+<template id="help-clip">
+  <h2>NEW RECORD の自動切り抜き</h2>
+  <p>自己ベストを更新したレースを、Steam のバックグラウンド録画から「レース開始〜ゴール後10秒」だけ切り抜いて保存します。画質はそのまま、音声付きです。そのコースを初めて走った時は切り抜きません。</p>
+  <h3>準備</h3>
+  <ol>
+    <li>Steam のバックグラウンド録画をオンにします（Steam の「設定」→「ゲームの録画」）</li>
+    <li><b>切り抜きをオンにする</b> をオンにします</li>
+    <li><b>Steam録画フォルダ</b> の「選ぶ」で、Steam の「録画の保存場所」と同じフォルダを選びます</li>
+    <li><b>保存先フォルダ</b> の「選ぶ」で、動画を保存したいフォルダを選びます</li>
+    <li>記録開始のときにフォルダを使う許可を聞かれるので、許可します</li>
+  </ol>
+  <ul>
+    <li>保存先の中に「通常マッチ」「カスタムマッチ」「モード不明」のフォルダが作られ、分けて保存されます</li>
+    <li>好きな試合は、ライブ記録の <b>この試合を切り抜く</b> や、記録一覧の <b>切り抜き</b> からも保存できます（Steam の録画が残っている、約2時間以内の試合だけ）</li>
+    <li>Chrome・Edge で使えます。Brave は、アドレス欄に <code>brave://flags</code> と入れて「File System Access API」を Enabled にすると使えます</li>
+  </ul>
+</template>
+
+<template id="help-records">
+  <h2>記録一覧</h2>
+  <ul>
+    <li><b>編集</b>：各行の「編集」で、コース・Activity・順位・タイム・人数・モードを直せます。読み間違いがあった時に使ってください</li>
+    <li><b>手動で追加</b>：記録できなかったレースを自分で入れられます</li>
+    <li><b>切り抜き</b>：その試合を Steam の録画から動画で保存します（約2時間以内の試合だけ）</li>
+    <li><b>CSVで保存 / CSVを読み込む</b>：記録をファイルに保存したり、戻したりします。別のブラウザや別のPCに引っ越す時にも使えます</li>
+    <li><b>全部消す</b>：すべての記録を消します。元に戻せないので、先に CSV で保存しておくと安心です</li>
+  </ul>
+  <p>画面上の「通常マッチ／カスタムマッチ／モード不明／すべて」で、表示する記録を切り替えられます。</p>
+  <h3>記録の保存場所</h3>
+  <p>記録は <b>このブラウザの中</b> にだけ保存され、どこにも送信されません。次の時は見えなくなるので、ときどき CSV で保存するか、自動バックアップを使ってください。</p>
+  <ul>
+    <li>ブラウザの閲覧データ（Cookie・サイトデータ）を消した</li>
+    <li>シークレットウィンドウで使った</li>
+    <li>別のブラウザや別のPCで開いた</li>
+  </ul>
+  <p>ツールの更新（再読み込み）で記録が消えることはありません。</p>
+</template>
+
+<template id="help-backup">
+  <h2>自動バックアップ</h2>
+  <ol>
+    <li><b>保存先を選ぶ</b> を押して、CSV ファイルの保存場所と名前を決めます</li>
+    <li>あとは記録が増えるたびに、そのファイルへ自動で上書き保存します</li>
+  </ol>
+  <ul>
+    <li>ページを開き直した時は、最初にページのどこかを押した時に、ファイルを使う許可を聞かれることがあります。許可すると、また自動で保存されます</li>
+    <li>戻す時は「CSVを読み込む」でこのファイルを選びます</li>
+    <li>やめる時は <b>オフにする</b> を押します（ファイルは消えません）</li>
+  </ul>
+</template>
+
+<template id="help-bands">
+  <h2>人数帯ごとの成績</h2>
+  <p>マッチの人数ごとに、平均順位や1位の回数をまとめます。どの人数帯が得意かがわかります。</p>
+  <figure><img src="help/matching.jpg" alt="マッチング画面。上の帯の下に出る人数" loading="lazy"><figcaption>マッチング画面（「プレイヤーを待っています」「まもなく開始します」）の人数を読み取ります</figcaption></figure>
+  <ul>
+    <li>読み取った人数は、そのマッチのレースすべてに付きます</li>
+    <li>マッチング画面を見る前に記録を始めたレースは、人数が空欄になります（記録一覧の「編集」で入れられます）</li>
+  </ul>
+</template>
+
+<template id="help-stats">
+  <h2>コース別の成績</h2>
+  <ul>
+    <li>コースごとに、走った回数・平均順位・最高順位・ベストタイム・DROP OUT の回数を表示します</li>
+    <li><b>行を押すと</b>、そのコースの順位とタイムの移り変わりをグラフで見られます</li>
+    <li>上のモードの切り替え（通常／カスタム／すべて）で、集計する記録を選べます</li>
+    <li>タイムは、ブラックパスを確認できた時だけ表示されます</li>
+  </ul>
+</template>
+
+<template id="help-worlds">
+  <h2>コース一覧</h2>
+  <p>公式のコースは、<b>ツールの更新で自動的に追加</b> されます（ページを開き直すだけ）。</p>
+  <p>更新がまだの新しいワールドは、<b>ワールドを追加</b> から自分で追加できます。</p>
+  <ol>
+    <li>ワールド名を入れます</li>
+    <li>形式（コースA〜D か、Activity 1・2/3・2/3・Final）を選びます</li>
+    <li>4つのコース名を、レース開始時の黄色い帯に出る名前のとおりに入れます</li>
+  </ol>
+  <ul>
+    <li>一覧に無いコースを走ったレースも、読み取った名前つきで記録されています。ワールドを追加すると、その記録もさかのぼって判別されます</li>
+    <li>自分で追加したワールドは、このブラウザにだけ保存されます。公式の更新で同じワールドが入ったら、自分で追加した分は消して大丈夫です</li>
+  </ul>
+</template>
 
 <dialog id="editDialog">
   <form method="dialog" id="editForm">
@@ -290,6 +462,6 @@
 </dialog>
 
 <video id="srcVideo" muted playsinline hidden></video>
-<script src="app.js?v=8e82c044a8"></script>
+<script src="app.js?v=6077e85500"></script>
 </body>
 </html>
