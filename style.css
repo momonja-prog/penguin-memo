@@ -492,3 +492,6 @@ button.tag-chip { padding: 6px 14px; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .chip.tag { color: #30d158; background: rgba(48, 209, 88, .18); }
 }
+
+/* 記録一覧の「さらに表示」 */
+.more-row td { text-align: center; padding: 14px; }
