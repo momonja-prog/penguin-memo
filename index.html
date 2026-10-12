@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=97277be6b6">
+<link rel="stylesheet" href="style.css?v=19393c1212">
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js" integrity="sha384-2BQ3U3OdKOb0Uczxqr41I9UvZkzr4V9Hv8uSzMMZAlmhsFClvdZX5wi5fDCzG+tM" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
@@ -75,13 +75,13 @@
     <div class="hero card">
       <div class="hero-text">
         <p>「記録開始」を押して、共有する画面で <b>Faaast Penguin のウィンドウ</b>（ゲームをフルスクリーンで遊ぶ時は<b>画面全体</b>）を選んでください。コース・Activity・順位・タイムを自動で記録します。通常マッチとカスタムマッチは、ロビーの画面から自動で見分けます。</p>
+        <button type="button" class="help-link" data-help="live">使い方を見る<svg viewBox="0 0 8 14" aria-hidden="true"><path d="M1.5 1.5 6.5 7l-5 5.5"/></svg></button>
       </div>
       <div class="hero-actions">
         <button id="liveStart" class="btn primary big">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>記録開始
         </button>
         <button id="liveStop" class="btn" disabled>停止</button>
-        <button type="button" class="help-btn hero-help" data-help="live" aria-label="使い方" title="使い方">?</button>
         <button id="clipNow" class="btn" title="レース中ならゴールの後に、レースの合間なら直前の試合を、Steam 録画から切り抜きます">この試合を切り抜く</button>
       </div>
     </div>
@@ -97,7 +97,7 @@
 
   <section id="tab-video" class="tab">
     <div class="card">
-      <h2 class="card-title">録画から読み込み<button type="button" class="help-btn" data-help="video" aria-label="使い方" title="使い方">?</button></h2>
+      <h2 class="card-title">録画から読み込み<button type="button" class="help-btn" data-help="video" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h2>
       <p class="muted">録画した動画ファイルを読み込んで、中のレース結果を記録します。</p>
       <div class="row">
         <label class="btn primary file-btn">動画ファイルを選ぶ<input type="file" id="videoFile" accept="video/*" hidden></label>
@@ -118,7 +118,7 @@
     <div class="monitor-grid">
       <div class="card preview-card">
         <div class="card-head">
-          <h3>プレビュー<button type="button" class="help-btn" data-help="monitor" aria-label="使い方" title="使い方">?</button></h3>
+          <h3>プレビュー<button type="button" class="help-btn" data-help="monitor" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h3>
           <label class="switch small"><input type="checkbox" id="debugBoxes"><span class="track"></span>読み取り範囲</label>
         </div>
         <canvas id="preview" width="480" height="270"></canvas>
@@ -134,7 +134,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <h3>タイムの表示（ブラックパス）<button type="button" class="help-btn" data-help="pass" aria-label="使い方" title="使い方">?</button></h3>
+          <h3>タイムの表示（ブラックパス）<button type="button" class="help-btn" data-help="pass" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h3>
           <p class="muted small">公式ではベストタイムの確認がブラックパスの特典なので、このツールでもブラックパスを確認できた人だけタイムを表示します。確認はシーズンごとです。</p>
         </div>
       </div>
@@ -159,7 +159,7 @@
     <div class="card">
       <div class="card-head">
         <div>
-          <h3>NEW RECORD の自動切り抜き<button type="button" class="help-btn" data-help="clip" aria-label="使い方" title="使い方">?</button></h3>
+          <h3>NEW RECORD の自動切り抜き<button type="button" class="help-btn" data-help="clip" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h3>
           <p class="muted small">NEW RECORD が出たレースを、Steam のバックグラウンド録画から「レース開始〜ゴール後10秒」だけ切り抜いて保存します（画質そのまま・音声付き）。</p>
         </div>
       </div>
@@ -184,7 +184,7 @@
   <section id="tab-records" class="tab">
     <div class="card">
       <div class="toolbar">
-        <h2 class="card-title">記録一覧<button type="button" class="help-btn" data-help="records" aria-label="使い方" title="使い方">?</button></h2>
+        <h2 class="card-title">記録一覧<button type="button" class="help-btn" data-help="records" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h2>
         <div class="row">
           <button id="addRecord" class="btn">手動で追加</button>
           <button id="exportCsv" class="btn">CSVで保存</button>
@@ -194,7 +194,7 @@
       </div>
       <div id="backupRow" class="settings backup">
         <div class="setting">
-          <span><b>自動バックアップ<button type="button" class="help-btn" data-help="backup" aria-label="使い方" title="使い方">?</button></b><small id="backupState">記録が増えるたびに、選んだ CSV ファイルへ自動で上書き保存します</small></span>
+          <span><b>自動バックアップ<button type="button" class="help-btn" data-help="backup" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></b><small id="backupState">記録が増えるたびに、選んだ CSV ファイルへ自動で上書き保存します</small></span>
           <span class="setting-action"><span id="backupName" class="folder">オフ</span><button id="backupOff" class="btn danger" hidden>オフにする</button><button id="backupPick" class="btn">保存先を選ぶ</button></span>
         </div>
       </div>
@@ -210,7 +210,7 @@
 
   <section id="tab-stats" class="tab">
     <div class="card">
-      <div class="toolbar"><h2 class="card-title">人数帯ごとの成績<button type="button" class="help-btn" data-help="bands" aria-label="使い方" title="使い方">?</button></h2></div>
+      <div class="toolbar"><h2 class="card-title">人数帯ごとの成績<button type="button" class="help-btn" data-help="bands" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h2></div>
       <div class="table-wrap">
         <table id="bandTable">
           <thead><tr><th>人数</th><th class="num">回数</th><th>平均順位</th><th class="num">1位</th><th class="num">表彰台率</th><th class="num">DROP OUT</th></tr></thead>
@@ -220,7 +220,7 @@
       <p id="bandNote" class="muted small"></p>
     </div>
     <div class="card">
-      <div class="toolbar"><h2 class="card-title">コース別の成績<button type="button" class="help-btn" data-help="stats" aria-label="使い方" title="使い方">?</button></h2></div>
+      <div class="toolbar"><h2 class="card-title">コース別の成績<button type="button" class="help-btn" data-help="stats" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h2></div>
       <div class="table-wrap">
         <table id="statsTable">
           <thead><tr><th>コース</th><th class="num">回数</th><th>平均順位</th><th>最高</th><th class="num">ベストタイム</th><th class="num">DROP OUT</th></tr></thead>
@@ -233,7 +233,7 @@
     <div class="card">
       <div class="toolbar">
         <div>
-          <h2 class="card-title">コース一覧<button type="button" class="help-btn" data-help="worlds" aria-label="使い方" title="使い方">?</button></h2>
+          <h2 class="card-title">コース一覧<button type="button" class="help-btn" data-help="worlds" aria-label="使い方" title="使い方"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.25"/><path d="M7.6 7.7a2.45 2.45 0 0 1 4.8.6c0 1.6-2.4 2.1-2.4 3.5"/><circle class="dot" cx="10" cy="14.4" r=".95"/></svg></button></h2>
           <p class="muted small">公式のコースは、ツールの更新で自動的に追加されます。更新がまだの新しいワールドは、ここから自分で追加できます（このブラウザにだけ保存されます）。</p>
         </div>
         <button id="addWorld" class="btn primary">ワールドを追加</button>
@@ -474,6 +474,6 @@
 </dialog>
 
 <video id="srcVideo" muted playsinline hidden></video>
-<script src="app.js?v=db32dfc1d8"></script>
+<script src="app.js?v=b15edb9926"></script>
 </body>
 </html>

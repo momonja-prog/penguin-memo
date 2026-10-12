@@ -434,13 +434,21 @@ tr.chart-row:hover td { background: none; }
 
 /* 使い方（各項目の「?」） */
 .help-btn {
-  display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
-  width: 20px; height: 20px; margin-left: 8px; padding: 0; border: 0; border-radius: 50%;
-  background: var(--fill); color: var(--muted); font-family: inherit; font-size: .75rem; font-weight: 600; line-height: 1; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; vertical-align: -2px;
+  width: 22px; height: 22px; margin-left: 6px; padding: 0; border: 0; border-radius: 50%;
+  background: transparent; color: var(--faint); cursor: pointer; transition: color .15s, background-color .15s;
 }
-.help-btn:hover { background: var(--fill-strong); color: var(--text); }
-.help-btn:focus-visible { outline: 3px solid var(--accent-soft); }
-.help-btn.hero-help { width: 40px; height: 40px; margin-left: 0; font-size: 1rem; }
+.help-btn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.help-btn svg .dot { fill: currentColor; stroke: none; }
+.help-btn:hover { color: var(--accent); background: var(--accent-soft); }
+.help-btn:focus-visible, .help-link:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+.help-link {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; padding: 0; border: 0; background: none;
+  color: var(--accent); font-family: inherit; font-size: .92rem; font-weight: 500; cursor: pointer;
+}
+.help-link svg { width: 7px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .15s; }
+.help-link:hover { text-decoration: underline; }
+.help-link:hover svg { transform: translateX(2px); }
 #helpDialog { width: min(640px, calc(100vw - 32px)); max-height: calc(100vh - 48px); }
 #helpDialog form { display: flex; flex-direction: column; gap: 16px; }
 .help-body { font-size: .92rem; line-height: 1.75; }
