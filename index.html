@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=42ddded410">
+<link rel="stylesheet" href="style.css?v=97277be6b6">
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js" integrity="sha384-2BQ3U3OdKOb0Uczxqr41I9UvZkzr4V9Hv8uSzMMZAlmhsFClvdZX5wi5fDCzG+tM" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
@@ -258,6 +258,11 @@
   </form>
 </dialog>
 
+<template id="help-egg">
+  <h2>みつかっちゃった</h2>
+  <figure><img src="help/egg.png" alt="作者の手描きのイースターエッグ"><figcaption>作者より</figcaption></figure>
+</template>
+
 <template id="help-live">
   <h2>ライブ記録の使い方</h2>
   <ol>
@@ -268,6 +273,7 @@
         <li>ゲームを <b>ウィンドウ</b> や <b>ボーダーレス</b> で遊ぶなら、ウィンドウの共有で大丈夫です</li>
         <li>ブラウザのタブの共有には対応していません</li>
       </ul>
+      <figure><img src="help/share.jpg" alt="共有する画面を選ぶ画面。「ウィンドウ」のタブで FaaastPenguin を選ぶ" loading="lazy"><figcaption>「ウィンドウ」のタブで FaaastPenguin を選んで「共有」。フルスクリーンで遊ぶ時は右の「画面全体」から選びます（見た目はブラウザによって少し違います）</figcaption></figure>
     </li>
     <li>あとは普通に遊ぶだけです。<b>このページは開いたまま</b> にしておいてください（ほかのタブやウィンドウを前に出していても大丈夫です）</li>
   </ol>
@@ -322,10 +328,14 @@
   <p>公式では、各コースのベストタイムを見られるのは <b>ブラックパスの特典</b> です。公式に迷惑をかけないよう、このツールでも <b>ブラックパスを持っていることを確認できた人だけ</b> タイムを表示します。確認できるまでもタイムは記録されていて、確認できた時点で過去の分も表示されます。</p>
   <h3>確認のしかた</h3>
   <ol>
-    <li>Steam のバックグラウンド録画をオンにします（Steam の「設定」→「ゲームの録画」）</li>
-    <li>下の「NEW RECORD の自動切り抜き」の欄で、<b>Steam録画フォルダ</b> を選びます（Steam の「録画の保存場所」のフォルダ）</li>
+    <li>Steam のバックグラウンド録画をオンにします（Steam の「設定」→「ゲームの録画」。ゲーム中の Steam オーバーレイでは「ゲームレコーディング」）</li>
+    <li>下の「NEW RECORD の自動切り抜き」の欄で、<b>Steam録画フォルダ</b> を選びます。Steam の設定の <b>録画フォルダー</b> に出ている場所（例：D:\gameVideo）をそのまま選んでください
+      <figure><img src="help/steam-recording.jpg" alt="Steam の設定のゲームレコーディング。録画フォルダーの欄" loading="lazy"><figcaption>Steam の設定の「録画フォルダー」。ここに出ている場所を選びます</figcaption></figure>
+    </li>
     <li>記録開始して、ゲームの画面を共有します</li>
-    <li>ゲームで <b>シーズンパス</b> を開き、ゴールドパスとブラックパスの両方に <b>OWNED</b> と出ている画面を表示します</li>
+    <li>ゲームで <b>シーズンパス</b> を開き、ゴールドパスとブラックパスの両方に <b>OWNED</b> と出ている画面を表示します
+      <figure><img src="help/owned.jpg" alt="シーズンパスの画面。ゴールドパスとブラックパスの両方に OWNED" loading="lazy"><figcaption>ゴールドパスとブラックパスの両方に「OWNED」が出ている画面</figcaption></figure>
+    </li>
     <li>そのまま <b>通常マッチのロビー</b> に戻ります。Steam の録画と照合して、確認完了です（数十秒かかります）</li>
   </ol>
   <ul>
@@ -340,9 +350,11 @@
   <p>自己ベストを更新したレースを、Steam のバックグラウンド録画から「レース開始〜ゴール後10秒」だけ切り抜いて保存します。画質はそのまま、音声付きです。そのコースを初めて走った時は切り抜きません。</p>
   <h3>準備</h3>
   <ol>
-    <li>Steam のバックグラウンド録画をオンにします（Steam の「設定」→「ゲームの録画」）</li>
+    <li>Steam のバックグラウンド録画をオンにします（Steam の「設定」→「ゲームの録画」）。録画の「長さ」は、初期設定の120分のままで大丈夫です</li>
     <li><b>切り抜きをオンにする</b> をオンにします</li>
-    <li><b>Steam録画フォルダ</b> の「選ぶ」で、Steam の「録画の保存場所」と同じフォルダを選びます</li>
+    <li><b>Steam録画フォルダ</b> の「選ぶ」で、Steam の設定の <b>録画フォルダー</b> に出ている場所（例：D:\gameVideo）を選びます
+      <figure><img src="help/steam-recording.jpg" alt="Steam の設定のゲームレコーディング。録画フォルダーの欄" loading="lazy"><figcaption>Steam の設定（ゲーム中のオーバーレイでは「ゲームレコーディング」）の「録画フォルダー」</figcaption></figure>
+    </li>
     <li><b>保存先フォルダ</b> の「選ぶ」で、動画を保存したいフォルダを選びます</li>
     <li>記録開始のときにフォルダを使う許可を聞かれるので、許可します</li>
   </ol>
@@ -462,6 +474,6 @@
 </dialog>
 
 <video id="srcVideo" muted playsinline hidden></video>
-<script src="app.js?v=6077e85500"></script>
+<script src="app.js?v=db32dfc1d8"></script>
 </body>
 </html>
