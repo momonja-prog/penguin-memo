@@ -459,3 +459,36 @@ tr.chart-row:hover td { background: none; }
 .help-body figure { margin: 12px 0; }
 .help-body img { display: block; width: 100%; height: auto; border-radius: 12px; }
 .help-body figcaption { margin-top: 6px; font-size: .8rem; color: var(--faint); }
+
+/* タグ */
+.tag-row { display: flex; align-items: center; justify-content: space-between; gap: 12px 16px; flex-wrap: wrap; }
+.tag-chips { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.tag-chip {
+  display: inline-flex; align-items: center; border-radius: 999px; background: var(--fill); color: var(--text);
+  font-family: inherit; font-size: .85rem; border: 0; padding: 0; cursor: pointer; transition: background-color .15s, color .15s;
+}
+button.tag-chip { padding: 6px 14px; }
+.tag-chip .tag-name { padding: 6px 14px; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; border-radius: 999px; }
+.tag-chip .tag-del { margin: 0 6px 0 -8px; width: 20px; height: 20px; border: 0; border-radius: 50%; background: none; color: inherit; opacity: .55; font: inherit; line-height: 1; cursor: pointer; }
+.tag-chip .tag-del:hover { opacity: 1; background: rgba(0, 0, 0, .08); }
+.tag-chip:hover:not(.on) { background: var(--fill-strong); }
+.tag-chip.on { background: var(--accent); color: #fff; font-weight: 600; }
+.tag-add { display: flex; gap: 8px; }
+.tag-add input {
+  width: 160px; font: inherit; font-size: .9rem; color: var(--text); padding: 7px 12px; border: 0; border-radius: 10px; background: var(--fill);
+}
+.tag-add input:focus { outline: 3px solid var(--accent-soft); box-shadow: 0 0 0 1px var(--accent); }
+.chip.tag { margin: 0 0 0 8px; background: rgba(52, 199, 89, .16); color: #248a3d; }
+.viewbar { gap: 10px 14px; flex-wrap: wrap; align-items: center; }
+.tag-filter { display: inline-flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); }
+.tag-filter select {
+  font: inherit; font-size: .85rem; color: var(--text); padding: 6px 28px 6px 12px; border: 0; border-radius: 10px; background-color: var(--fill);
+  appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2386868b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center; background-size: 10px 6px;
+}
+.tag-filter select:focus-visible { outline: 3px solid var(--accent-soft); }
+.segmented.small button { padding: 5px 12px; font-size: .82rem; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .chip.tag { color: #30d158; background: rgba(48, 209, 88, .18); }
+}
