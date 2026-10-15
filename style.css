@@ -495,3 +495,12 @@ button.tag-chip { padding: 6px 14px; }
 
 /* 記録一覧の「さらに表示」 */
 .more-row td { text-align: center; padding: 14px; }
+
+/* メンテナンス中 */
+.maint { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; background: rgba(0, 0, 0, .35); backdrop-filter: blur(10px); }
+.maint[hidden] { display: none; }
+.maint-card { width: min(440px, 100%); padding: 32px 28px; border-radius: 22px; background: var(--surface); color: var(--text); text-align: center; box-shadow: 0 30px 80px rgba(0, 0, 0, .3); }
+.maint-card h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+.maint-card p { margin: 8px 0; line-height: 1.7; }
+.maint-time { font-weight: 600; font-variant-numeric: tabular-nums; }
+body.in-maintenance { overflow: hidden; }
